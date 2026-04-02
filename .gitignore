@@ -1,0 +1,46 @@
+# Data (large files - track with DVC or download via scripts)
+data/raw/
+data/processed/
+data/interim/
+data/external/
+*.csv
+*.parquet
+*.npy
+*.pkl
+*.h5
+
+# Models (large files - manage separately)
+models/
+*.pth
+*.pt
+*.ckpt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports (generated)
+reports/figures/*.png
+reports/figures/*.pdf
