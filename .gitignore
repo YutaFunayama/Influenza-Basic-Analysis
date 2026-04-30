@@ -9,8 +9,8 @@ data/external/
 *.pkl
 *.h5
 
-# Models (large files - manage separately)
-models/
+# Models (large weight files - manage separately. src/models/ は除外しない)
+/models/
 *.pth
 *.pt
 *.ckpt
