@@ -5,17 +5,23 @@
 `models/patchtst_prefecture_hpo/patchtst_hpo_pref_XX.pth` をロードする際に必要。
 元実装: 感染症拡大シミュレーション/scripts/hpo_patchtst_prefecture_pilot.py の HPO版クラス。
 
-使用例:
+使用例（h=1, 東京=13 の場合）:
     import torch
     from src.models.prefecture_patchtst import PrefecturePatchTST
     from src.utils.device import get_device
+    from src.utils.load_hpo_params import get_best_params
 
     device = get_device()
-    model = PrefecturePatchTST(seq_len=64, n_features=N, d_model=128, n_heads=8,
-                               patch_len=16, dropout=0.1)
-    model.load_state_dict(torch.load("models/patchtst_prefecture_hpo/patchtst_hpo_pref_13.pth",
-                                     map_location=device))
+    model_kwargs, _ = get_best_params(prefecture_code=13, horizon=1)
+    # seq_len=64, n_features=5 はHPO時固定値
+    model = PrefecturePatchTST(seq_len=64, n_features=5, **model_kwargs)
+    model.load_state_dict(torch.load(
+        "models/patchtst_prefecture_hpo/patchtst_hpo_pref_13.pth",
+        map_location=device))
     model.to(device).eval()
+
+ホライゾン別 (h2/h3/h4) のチェックポイントは `models/patchtst_prefecture_hpo/h2/`,
+`h3/`, `h4/` 配下にある。`get_best_params(13, 2)` 等で対応するパラメータを取得できる。
 
 依存: torch, tsai (`pip install tsai`)
 """

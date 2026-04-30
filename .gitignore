@@ -8,6 +8,8 @@ data/external/
 *.npy
 *.pkl
 *.h5
+# 設定値として扱うCSVは追跡（configs/配下）
+!configs/*.csv
 
 # Models (large weight files - manage separately. src/models/ は除外しない)
 /models/
